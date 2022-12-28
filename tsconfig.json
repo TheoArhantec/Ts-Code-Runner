@@ -6,8 +6,6 @@
     "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"],
-      "@filters": ["src/filters"],
-      "@filters/*": ["src/filters/*"],
       "@config.json": ["src/config/config.json"],
       "@config/*": ["src/config/*"],
       "@configBuilder": ["src/config/config-builder"],
@@ -15,8 +13,6 @@
       "@constants": ["src/constants"],
       "@server/*": ["src/server/*"],
       "@server": ["src/server"],
-      "@ssps/*": ["src/ssps/*"],
-      "@ssps": ["src/ssps"],
       "@services/*": ["src/services/*"],
       "@services": ["src/services"],
       "@types/*": ["src/types/*"],
