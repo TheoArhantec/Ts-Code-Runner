@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ext": "ts,json",
+  "ignore": ["node_modules", "test/**/*"],
+  "exec": "DEV_ENV=true SHOULD_CONSOLE_LOG_ERROR=true npm run start"
+}

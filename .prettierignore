@@ -1,0 +1,4 @@
+**/src/@types
+**/coverage
+**/node_modules
+**.*
