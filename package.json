@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
+    "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "theo.arhantec",

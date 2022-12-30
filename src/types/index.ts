@@ -15,40 +15,25 @@ export type ArgumentTypes<F extends Function> = F extends (...args: infer A) => 
 export type BenchOptions<T extends Function = Function, A = ArgumentTypes<T>> = {
   fn: T;
   name: T['name'] | string;
-  args: A | Array<any>;
+  args?: Opt<A | Array<any>>;
 };
-
-export type IterationOptions<T extends Function = Function> = BenchOptions<T> & {
-  laps: number;
-};
-
-export type OperationSecondsOptions<T extends Function = Function> = BenchOptions<T> & {
-  ms: number;
-};
-
-export type EnrichedContext<T extends BenchOptions = BenchOptions> = T & {
-  result: number | string;
-};
-
-export type LogConfig = {
-  verbose: boolean;
-};
-
 
 export type Context = {
+  type: 'OPS';
   raw_result: Array<number>;
   fn: BenchOptions['fn'];
   name: string;
   result: Array<number>;
-};
-
-export type OperationContext = Context & {
-  type: 'OPS';
   time: number;
+} & { [key:string]: any };
+
+export type ContextDictionnary<T extends Context = Context> = { [key: string]: T };
+
+export type BenchmarkConfig = {
+  lap: number;
+  timeIsMs: number;
 };
 
-export type ContextDictionnary<T extends Context> = {
-  type?: T extends OperationContext ? 'OPS' : never;
-} & { [key: string]: T };
+export type FunctionVoid = (...args: any) => void;
 
 export * from './formatter.types';

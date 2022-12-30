@@ -1,3 +1,4 @@
+import { SECONDS_IN_MS } from '@src/constants';
 import { Context } from '@src/types';
 
 export class RunnerUtils {
@@ -37,5 +38,9 @@ export class RunnerUtils {
       sum += numbers[i];
     }
     return sum / numbers.length;
+  }
+
+  public static getNbActionsSeconds(nbActions: number, timeInMs: number): number {
+    return nbActions / (timeInMs / SECONDS_IN_MS);
   }
 }

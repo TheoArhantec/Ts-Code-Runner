@@ -3,9 +3,9 @@ import { IFormatter } from './IFormatter.formatter.service';
 import fs from 'fs';
 import { RunnerUtils } from '@src/utils/runner.utils';
 import { PrinterUtils } from '@src/utils/printer.utils';
+import { ERROR_MISSING_FILENAME_OPTIONS, ERROR_MISSING_PATH_OPTIONS } from '@src/constants';
 
 export class MardownFormatter implements IFormatter {
-
   /**
    * Formate les résultats de benchmark dans un fichier Markdown.
    * @template T - Le type de contexte des résultats de benchmark.
@@ -88,8 +88,8 @@ export class MardownFormatter implements IFormatter {
    * @returns {Nullable<Error>} Une erreur si les options sont invalides, `null` sinon.
    */
   public validateOptions(options: IFormatterOptions): Nullable<Error> {
-    if (!options.filename) throw new Error('Missing filename option.');
-    if (!options.path) throw new Error('Missing path option.');
+    if (!options.filename) ERROR_MISSING_FILENAME_OPTIONS;
+    if (!options.path) ERROR_MISSING_PATH_OPTIONS;
     return null;
   }
 }

@@ -1,7 +1,6 @@
-import { JSONFormatter } from './services/formatters/json.formatter.service';
-import { MardownFormatter } from './services/formatters/markdown.formatter.service';
-import { BenchmarkRunner } from './services/runner.services';
-import { ContextDictionnary, Nullable } from './types';
+import { MardownFormatter } from '../src/services/formatters/markdown.formatter.service';
+import { BenchmarkRunner } from '../src/services/runner.services';
+import { ContextDictionnary, Nullable } from '../src/types';
 
 const arr1: Array<number> = new Array(1).fill(1);
 const arr10: Array<number> = new Array(10).fill(1);
@@ -47,8 +46,8 @@ function dummy10000(arr: Array<number>) {
 const dummyContext: ContextDictionnary = {};
 
 const Runner: BenchmarkRunner = new BenchmarkRunner({
-  lap: 10,
-  timeIsMs: 10
+  lap: 50,
+  timeIsMs: 100
 });
 
 Runner.bench(
@@ -86,7 +85,7 @@ Runner.bench(
   }
 );
 
-Runner.exportTo([new MardownFormatter(), new JSONFormatter()], { filename: 'Test', path: './benchmarks' }, dummyContext, (error: Nullable<Error>) => {
+Runner.exportTo(new MardownFormatter(), { filename: 'dummy-bench', path: '../benchmarks' }, dummyContext, (error: Nullable<Error>) => {
   // eslint-disable-next-line no-console
   if (error) console.error(error);
 });

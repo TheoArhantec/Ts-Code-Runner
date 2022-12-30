@@ -17,6 +17,7 @@ auto-save-list
 tramp
 .\#*
 
+/benchmarks/*
 # Org-mode
 .org-id-locations
 *_archive

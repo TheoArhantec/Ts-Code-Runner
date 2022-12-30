@@ -1,6 +1,26 @@
 # Comparatif-Remove-Duplicate-Function
 
-Ceci est benchmark de type Operation par seconde.
+### [BENCHMARK] - removeDuplicateWithArray
+
+
+```
+function removeDuplicateWithArray(array) {
+    const arrayWithoutDuplicate = [];
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        if (array.includes(element))
+            continue;
+        array.push(element);
+    }
+    return arrayWithoutDuplicate;
+}
+```
+
+
+
+ résultat: 5,460,848.000 Ops/s
+ 
+---
 ### [BENCHMARK] - removeDuplicateWithMap
 
 
@@ -21,28 +41,7 @@ function removeDuplicateWithMap(array) {
 
 
 
- résultat: 6,459,547.667 Ops/s
- 
----
-### [BENCHMARK] - removeDuplicateWithArray
-
-
-```
-function removeDuplicateWithArray(array) {
-    const arrayWithoutDuplicate = [];
-    for (let index = 0; index < array.length; index++) {
-        const element = array[index];
-        if (array.includes(element))
-            continue;
-        array.push(element);
-    }
-    return arrayWithoutDuplicate;
-}
-```
-
-
-
- résultat: 5,427,484.333 Ops/s
+ résultat: 6,426,100.667 Ops/s
  
 ---
 ### [BENCHMARK] - removeDuplicate
@@ -56,5 +55,5 @@ function removeDuplicate(array) {
 
 
 
- résultat: 3,132,100.333 Ops/s
+ résultat: 3,033,142.000 Ops/s
  

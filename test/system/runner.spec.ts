@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { BenchmarkRunner } from '../../src/index';
+import { BenchmarkRunner } from '../../src/services/runner.services';
 import { MardownFormatter } from '../../src/services/formatters/markdown.formatter.service';
-import { ContextDictionnary, Nullable, OperationContext } from '../../src/types';
+import { Context, ContextDictionnary, Nullable } from '../../src/types';
 
 function removeDuplicate<T extends string | number>(array: Array<T>) {
   return [...new Set(array)];
@@ -32,29 +32,30 @@ function removeDuplicateWithArray<T extends string | number>(array: Array<T>) {
 
 describe('SYSTEM::RUNNER', () => {
   it('should run benchmark', () => {
-    const benchmark: BenchmarkRunner = new BenchmarkRunner();
-    const sample: Array<number> = [1, 2, 3, 3, 3, 3, 3, 3];
-    const context: ContextDictionnary<OperationContext> = {};
     const bench_duration: number = 100;
-    benchmark.multiple_operation_per_second<typeof removeDuplicate>(
+    const benchmark: BenchmarkRunner = new BenchmarkRunner({
+      lap: 30,
+      timeIsMs: bench_duration
+    });
+    const sample: Array<number> = [1, 2, 3, 3, 3, 3, 3, 3];
+    const context: ContextDictionnary<Context> = {};
+
+    benchmark.bench<typeof removeDuplicate>(
       [
         {
           fn: removeDuplicateWithMap,
           name: 'removeDuplicateWithMap',
-          args: [...sample],
-          ms: bench_duration
+          args: [...sample]
         },
         {
           fn: removeDuplicateWithArray,
           name: 'removeDuplicateWithArray',
-          args: [...sample],
-          ms: bench_duration
+          args: [...sample]
         },
         {
           fn: removeDuplicate,
           name: 'removeDuplicate',
-          args: [...sample],
-          ms: bench_duration
+          args: [...sample]
         }
       ],
       context,
@@ -72,9 +73,11 @@ describe('SYSTEM::RUNNER', () => {
     console.log(context);
   });
   it('should run and print', () => {
-    const benchmark: BenchmarkRunner = new BenchmarkRunner();
+    const benchmark: BenchmarkRunner = new BenchmarkRunner({
+      timeIsMs: 10
+    });
     const spyPrint: jest.SpyInstance = jest.spyOn(benchmark, 'print');
-    const context: ContextDictionnary<OperationContext> = {};
+    const context: ContextDictionnary<Context> = {};
     function twoSum(nums: number[], target: number): number[] {
       for (let index: number = 0; index < nums.length; index++) {
         for (let index2: number = 1; index2 < nums.length; index2++) {
@@ -85,13 +88,12 @@ describe('SYSTEM::RUNNER', () => {
       return [0, 0];
     }
 
-    benchmark.multiple_operation_per_second<typeof twoSum>(
+    benchmark.bench<typeof twoSum>(
       [
         {
           fn: twoSum,
           name: 'removeDuplicate',
-          args: [[1, 2, 3, 3], 6],
-          ms: 10
+          args: [[1, 2, 3, 3], 6]
         }
       ],
       context,
